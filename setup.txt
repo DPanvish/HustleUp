@@ -1,0 +1,7 @@
+1) Install next js npx create-next-app@latest ./
+2) Add extra properties to package.json for ensuring latest version of react is used across all the packages 
+"packageManager": "npm@10.5.2",
+"overrides": {
+    "react": "$react",
+    "react-dom": "react-dom"
+}
