@@ -1,7 +1,10 @@
-1) Install next js npx create-next-app@latest ./
+1) Install next js "npx create-next-app@latest ./"
 2) Add extra properties to package.json for ensuring latest version of react is used across all the packages 
 "packageManager": "npm@10.5.2",
 "overrides": {
     "react": "$react",
-    "react-dom": "react-dom"
+    "react-dom": "$react-dom"
 }
+3) For Auth we are using Auth.js in Next.js "npm install next-auth@beta"
+   -> For Auth Secret "npx auth secret"
+   -> Complete the configuration by reading the docs in the Auth.js
