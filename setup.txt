@@ -8,3 +8,4 @@
 3) For Auth we are using Auth.js in Next.js "npm install next-auth@beta"
    -> For Auth Secret "npx auth secret"
    -> Complete the configuration by reading the docs in the Auth.js
+   -> Add the providers
