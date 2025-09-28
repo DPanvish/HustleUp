@@ -9,3 +9,4 @@
    -> For Auth Secret "npx auth secret"
    -> Complete the configuration by reading the docs in the Auth.js
    -> Add the providers
+4) npm install tailwindcss-animate @tailwindcss/typography
