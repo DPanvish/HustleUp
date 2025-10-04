@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Navbar from "../components/navbar";
-import SearchBar from "../components/SearchBar";
+import Navbar from "../../components/navbar";
+import SearchBar from "../../components/SearchBar";
 
 export default async function Home({searchParams}: {searchParams: Promise<{query?: string}>}) {
   
