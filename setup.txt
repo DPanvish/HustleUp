@@ -11,3 +11,4 @@
    -> Add the providers
 4) npm install tailwindcss-animate @tailwindcss/typography
 5) npx shadcn@latest init
+6) npx shadcn@latest add button for button in shadcn

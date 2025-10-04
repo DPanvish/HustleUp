@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link";
+import {X} from 'lucide-react';
 
 
 const SearchBarReset = () => {
@@ -20,7 +21,7 @@ const SearchBarReset = () => {
     <div>
       <button type="reset" onClick={reset}>
         <Link href="/" className="text-white search-btn">
-          X
+          <X className="size-5" />
         </Link>
       </button>
     </div>
