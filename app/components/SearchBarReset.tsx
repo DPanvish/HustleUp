@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link";
+
 
 const SearchBarReset = () => {
 
@@ -16,7 +18,11 @@ const SearchBarReset = () => {
 
   return (
     <div>
-      <button type="reset" onClick={reset}></button>
+      <button type="reset" onClick={reset}>
+        <Link href="/" className="text-white search-btn">
+          X
+        </Link>
+      </button>
     </div>
   )
 }
