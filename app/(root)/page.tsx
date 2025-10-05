@@ -1,13 +1,24 @@
 import Image from "next/image";
 import Navbar from "../../components/navbar";
 import SearchBar from "../../components/SearchBar";
+import { title } from "process";
+import StartupCard from "@/components/StartupCard";
 
 export default async function Home({searchParams}: {searchParams: Promise<{query?: string}>}) {
   
   // This is a hack to get the query param from the URL.
   // In Next.js, you can't use useRouter() or useParams() inside of a server component. So we have to pass it as a prop.
   const query = (await searchParams).query;
-
+  const posts = [{
+    _createdAt: "Yesterday",
+    views: 55,
+    author: {_id: 1},
+    _id: 1,
+    description: "This is a description",
+    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    category: "BlockChain",
+    title: "Web3 Startup",
+  }]
 
   return (
     <>
@@ -23,6 +34,14 @@ export default async function Home({searchParams}: {searchParams: Promise<{query
         <p className="text-30-semibold">
           {query ? `Search results for "${query}"` : "All Startups"}
         </p>
+
+        <ul className="mt-7 card-grid">
+          {posts.length > 0 ? (
+            posts.map((post: StartupCardType, index: number) => {
+              <StartupCard />
+            })
+          )}
+        </ul>
       </section>
     </>
   );
