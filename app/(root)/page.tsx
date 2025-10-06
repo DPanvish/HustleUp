@@ -10,9 +10,9 @@ export default async function Home({searchParams}: {searchParams: Promise<{query
   // In Next.js, you can't use useRouter() or useParams() inside of a server component. So we have to pass it as a prop.
   const query = (await searchParams).query;
   const posts = [{
-    _createdAt: "Yesterday",
+    _createdAt: new Date(),
     views: 55,
-    author: {_id: 1},
+    author: {_id: 1, name: "Panvish"},
     _id: 1,
     description: "This is a description",
     image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -38,7 +38,7 @@ export default async function Home({searchParams}: {searchParams: Promise<{query
         <ul className="mt-7 card-grid">
           {posts?.length > 0 ? (
             posts.map((post: StartupCardType, index: number) => (
-              <StartupCard />
+              <StartupCard key={post?._id} post={post} />
             ))
           ):(
             <p className="no-results">No startups found</p>
