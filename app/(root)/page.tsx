@@ -36,10 +36,12 @@ export default async function Home({searchParams}: {searchParams: Promise<{query
         </p>
 
         <ul className="mt-7 card-grid">
-          {posts.length > 0 ? (
-            posts.map((post: StartupCardType, index: number) => {
+          {posts?.length > 0 ? (
+            posts.map((post: StartupCardType, index: number) => (
               <StartupCard />
-            })
+            ))
+          ):(
+            <p className="no-results">No startups found</p>
           )}
         </ul>
       </section>
