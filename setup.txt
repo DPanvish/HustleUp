@@ -13,3 +13,5 @@
 5) npx shadcn@latest init
 6) npx shadcn@latest add button for button in shadcn
 7) It is recommended that componnts folder is placed outside app folder
+8) Sanity Install "npm create sanity@latest -- --project r264oilc --dataset production --template clean"
+9) To use sanity live api feature "npm install next-sanity@canary"
