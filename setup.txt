@@ -15,3 +15,4 @@
 7) It is recommended that componnts folder is placed outside app folder
 8) Sanity Install "npm create sanity@latest -- --project r264oilc --dataset production --template clean"
 9) To use sanity live api feature "npm install next-sanity@canary"
+10) To markdown plugin in the schema "npm install sanity-plugin-markdown"
