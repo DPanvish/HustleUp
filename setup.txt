@@ -16,3 +16,14 @@
 8) Sanity Install "npm create sanity@latest -- --project r264oilc --dataset production --template clean"
 9) To use sanity live api feature "npm install next-sanity@canary"
 10) To markdown plugin in the schema "npm install sanity-plugin-markdown"
+11) To extract the sanity schemas "npx sanity@latest schema extract --path=./sanity/extract.json"
+12) Add the configuration file sanity-typegen.json
+{
+    "path": "./src/**/*.{ts,tsx,js,jsx}",
+    "schema": "./sanity/extract.json",
+    "generates": "./sanity/types.ts"
+}
+
+and run this command "npx sanity@latest typegen generate"
+This will automatically create the type.ts for the schemas which contains 
+the types of the schemas
