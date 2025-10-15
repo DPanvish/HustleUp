@@ -3,22 +3,29 @@ import Navbar from "../../components/navbar";
 import SearchBar from "../../components/SearchBar";
 import { title } from "process";
 import StartupCard from "@/components/StartupCard";
+import { client } from "@/sanity/lib/client";
+import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 
 export default async function Home({searchParams}: {searchParams: Promise<{query?: string}>}) {
   
   // This is a hack to get the query param from the URL.
   // In Next.js, you can't use useRouter() or useParams() inside of a server component. So we have to pass it as a prop.
   const query = (await searchParams).query;
-  const posts = [{
-    _createdAt: new Date(),
-    views: 55,
-    author: {_id: 1, name: "Panvish"},
-    _id: 1,
-    description: "This is a description",
-    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    category: "BlockChain",
-    title: "Web3 Startup",
-  }]
+
+  const posts = await client.fetch(STARTUPS_QUERY);
+
+  console.log(JSON.stringify(posts, null, 2));
+
+  // const posts = [{
+  //   _createdAt: new Date(),
+  //   views: 55,
+  //   author: {_id: 1, name: "Panvish"},
+  //   _id: 1,
+  //   description: "This is a description",
+  //   image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   category: "BlockChain",
+  //   title: "Web3 Startup",
+  // }]
 
   return (
     <>

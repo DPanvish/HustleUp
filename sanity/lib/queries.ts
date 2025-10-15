@@ -1,5 +1,7 @@
 import { defineQuery } from "next-sanity";
 
+
+// The query to fetch all posts sorted by date in descending order
 export const STARTUPS_QUERY = defineQuery(`*[_type == "startup" && defined(slug.current)] | order(_createdAt desc){
     _id,
     title,
