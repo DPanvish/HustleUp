@@ -4,6 +4,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { Button } from './ui/button'
+import { Author, Startup } from '@/sanity/types'
+
+export type StartupCardType = Omit<Startup, "author"> & {author?: Author};
 
 const StartupCard = ({post}: {post: StartupCardType}) => {
   const {_createdAt, views, author: { _id: authorId, name}, _id, description, image, category, title} = post;
