@@ -27,3 +27,9 @@
 and run this command "npx sanity@latest typegen generate"
 This will automatically create the type.ts for the schemas which contains 
 the types of the schemas
+13) Add the below configuration in the package.json scripts
+"predev": "npm run typegen",
+"prebuild": "npm run typegen",
+"typegen": "sanity schema extract --path=./sanity/extract.json && sanity typegen generate"
+
+Now we can run "npm run typegen" to generate types
