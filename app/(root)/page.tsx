@@ -2,7 +2,7 @@ import Image from "next/image";
 import Navbar from "../../components/navbar";
 import SearchBar from "../../components/SearchBar";
 import { title } from "process";
-import StartupCard from "@/components/StartupCard";
+import StartupCard, { StartupCardType } from "@/components/StartupCard";
 import { client } from "@/sanity/lib/client";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 
