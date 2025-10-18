@@ -5,7 +5,7 @@ import { title } from "process";
 import StartupCard, { StartupCardType } from "@/components/StartupCard";
 import { client } from "@/sanity/lib/client";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 
 export default async function Home({searchParams}: {searchParams: Promise<{query?: string}>}) {
   
@@ -57,6 +57,8 @@ export default async function Home({searchParams}: {searchParams: Promise<{query
           )}
         </ul>
       </section>
+
+      <SanityLive/>
     </>
   );
 }
