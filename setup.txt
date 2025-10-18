@@ -33,3 +33,5 @@ the types of the schemas
 "typegen": "sanity schema extract --path=./sanity/extract.json && sanity typegen generate"
 
 Now we can run "npm run typegen" to generate types
+14) Run this command "npm i server-only"
+This will help us ensure that a specific module can be used in the server components
