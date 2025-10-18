@@ -5,6 +5,7 @@ import { title } from "process";
 import StartupCard, { StartupCardType } from "@/components/StartupCard";
 import { client } from "@/sanity/lib/client";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
+import { sanityFetch } from "@/sanity/lib/live";
 
 export default async function Home({searchParams}: {searchParams: Promise<{query?: string}>}) {
   
@@ -12,7 +13,11 @@ export default async function Home({searchParams}: {searchParams: Promise<{query
   // In Next.js, you can't use useRouter() or useParams() inside of a server component. So we have to pass it as a prop.
   const query = (await searchParams).query;
 
-  const posts = await client.fetch(STARTUPS_QUERY);
+  // This will fetch all the posts from Sanity.io using the query defined in queries.ts
+  // const posts = await client.fetch(STARTUPS_QUERY);
+
+  // This will also fetch all the posts from Sanity.io using the query defined in queries.ts but this time it will be live updated.
+  const {data: posts} = await sanityFetch({query: STARTUPS_QUERY});
 
   console.log(JSON.stringify(posts, null, 2));
 
