@@ -19,8 +19,6 @@ export default async function Home({searchParams}: {searchParams: Promise<{query
   // This will also fetch all the posts from Sanity.io using the query defined in queries.ts but this time it will be live updated.
   const {data: posts} = await sanityFetch({query: STARTUPS_QUERY});
 
-  console.log(JSON.stringify(posts, null, 2));
-
   // const posts = [{
   //   _createdAt: new Date(),
   //   views: 55,
