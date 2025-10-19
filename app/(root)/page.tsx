@@ -12,12 +12,13 @@ export default async function Home({searchParams}: {searchParams: Promise<{query
   // This is a hack to get the query param from the URL.
   // In Next.js, you can't use useRouter() or useParams() inside of a server component. So we have to pass it as a prop.
   const query = (await searchParams).query;
+  const params = {search: query || null};
 
   // This will fetch all the posts from Sanity.io using the query defined in queries.ts
   // const posts = await client.fetch(STARTUPS_QUERY);
 
   // This will also fetch all the posts from Sanity.io using the query defined in queries.ts but this time it will be live updated.
-  const {data: posts} = await sanityFetch({query: STARTUPS_QUERY});
+  const {data: posts} = await sanityFetch({query: STARTUPS_QUERY, params});
 
   // const posts = [{
   //   _createdAt: new Date(),
