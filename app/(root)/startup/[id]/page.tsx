@@ -4,19 +4,26 @@ import { STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import React from 'react'
+import React, { Suspense } from 'react'
+import markdownit from "markdown-it";
+import { Skeleton } from '@/components/ui/skeleton';
+import View from '@/components/View';
 
+
+const md = markdownit();
 export const experimental_ppr = true;
 
 const page = async ({params}: {params: Promise<{id:string}>}) => {
-    const id = (await params).id;
+  const id = (await params).id;
 
-    const post = await client.fetch(STARTUP_BY_ID_QUERY, {id});
+  const post = await client.fetch(STARTUP_BY_ID_QUERY, {id});
 
-    if(!post){
-        return notFound();
-    }
-    
+  if(!post){
+      return notFound();
+  }
+
+  const parsedContent = md.render(post?.pitch || '');
+  
   return (
     <>
         <section className="pink-container !min-h-[230px]">
@@ -45,8 +52,21 @@ const page = async ({params}: {params: Promise<{id:string}>}) => {
             </div>
 
             <h3 className="text-30-bold">Pitch Details</h3>
+            {parsedContent ? (
+              <article className="max-w-4xl prose break-all font-work-sans" dangerouslySetInnerHTML={{__html: parsedContent}}/>
+            ) : (
+              <p className="no-result">No details provided</p>
+            )}
           </div>
+
+          <hr className="divider" />
+
+          <Suspense fallback={<Skeleton className="view-skeleton"/>}>
+            <View id={id} />
+          </Suspense>
         </section>
+
+
     </>
   )
 }
