@@ -2,9 +2,27 @@ import React from 'react'
 import Ping from './Ping'
 import { client } from '@/sanity/lib/client'
 import { STARTUP_VIEWS_QUERY } from '@/sanity/lib/queries'
+import { writeClient } from '@/sanity/lib/write-client'
+import {after} from "next/server";
 
 const View = async ({id}: {id: string}) => {
   const {views: totalViews } = await client.withConfig({useCdn: false}).fetch(STARTUP_VIEWS_QUERY, {id});
+  
+  // after is a hook that runs after the component is rendered
+  /*
+    after allows you to schedule work to be executed after a response (or prerender) 
+    is finished. This is useful for tasks and other side effects that should not block the response, 
+    such as logging and analytics.
+  */
+
+  // increment views by one
+  after(async() => 
+    await writeClient
+    .patch(id)
+    .set({views: totalViews + 1})
+    .commit(),
+  );
+
   return (
     <div className="view-container">
       <div className="absolute -top-2 -right-2">
