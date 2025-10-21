@@ -60,7 +60,8 @@ const page = async ({params}: {params: Promise<{id:string}>}) => {
           </div>
 
           <hr className="divider" />
-
+          
+          {/* This is uses nextjs PPR to render the view component */}
           <Suspense fallback={<Skeleton className="view-skeleton"/>}>
             <View id={id} />
           </Suspense>
