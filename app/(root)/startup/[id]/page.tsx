@@ -61,7 +61,10 @@ const page = async ({params}: {params: Promise<{id:string}>}) => {
 
           <hr className="divider" />
           
-          {/* This is uses nextjs PPR to render the view component */}
+          {/* 
+              This is uses nextjs PPR to render the view component 
+              Only this component is rendered dynamically based on the id param
+          */}
           <Suspense fallback={<Skeleton className="view-skeleton"/>}>
             <View id={id} />
           </Suspense>
