@@ -36,3 +36,4 @@ Now we can run "npm run typegen" to generate types
 14) Run this command "npm i server-only"
 This will help us ensure that a specific module can be used in the server components
 15) install "npm install markdown-it" and "npm i --save-dev @types/markdown-it"
+16) install additional css components "npx shadcn@latest add input textarea toast"
