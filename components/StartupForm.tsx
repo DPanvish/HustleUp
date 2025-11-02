@@ -9,10 +9,14 @@ import { Input } from './ui/input'
 import { Textarea } from './ui/textarea';
 import MDEditor from '@uiw/react-md-editor';
 import { Button } from './ui/button';
+import { Send } from 'lucide-react';
 
 const StartupForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [pitch, setPitch] = useState("**Hello world!**");
+  const [pitch, setPitch] = useState("");
+
+  const isPending = false;
+
   return (
     <form action={() => {}} className="startup-form">
       <div>
@@ -63,7 +67,10 @@ const StartupForm = () => {
         {errors.link && <p className="startup-form-error">{errors.link}</p>}
       </div>
 
-      <Button type="submit" className="startup-form-btn">Submit</Button>
+      <Button type="submit" className="startup-form-btn" disabled={isPending}>
+        {isPending ? "Submitting..." : "Submit Your Pitch"}
+        <Send className="ml-2 size-6" />
+      </Button>
     </form>
   )
 }
