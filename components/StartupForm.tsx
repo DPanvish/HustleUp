@@ -7,9 +7,12 @@
 import React, { useState } from 'react'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea';
+import MDEditor from '@uiw/react-md-editor';
+import { Button } from './ui/button';
 
 const StartupForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [pitch, setPitch] = useState("**Hello world!**");
   return (
     <form action={() => {}} className="startup-form">
       <div>
@@ -39,6 +42,28 @@ const StartupForm = () => {
 
         {errors.link && <p className="startup-form-error">{errors.link}</p>}
       </div>
+
+      <div data-color-mode="light">
+        <label htmlFor="pitch" className="startup-form-label">Image URL</label>
+        <MDEditor
+          value={pitch}
+          onChange={(value) => setPitch(value as string)}
+          id="pitch"
+          preview="edit"
+          height={300}
+          style={{borderRadius: 20, overflow: "hidden"}}
+          textareaProps={{
+            placeholder: "Briefly describe your idea and what problem it solves",
+          }}
+          previewOptions={{
+            disallowedElements: ["style"],
+          }}
+        />
+
+        {errors.link && <p className="startup-form-error">{errors.link}</p>}
+      </div>
+
+      <Button type="submit" className="startup-form-btn">Submit</Button>
     </form>
   )
 }
