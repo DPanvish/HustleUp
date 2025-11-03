@@ -10,18 +10,34 @@ import { Textarea } from './ui/textarea';
 import MDEditor from '@uiw/react-md-editor';
 import { Button } from './ui/button';
 import { Send } from 'lucide-react';
+import { formSchema } from '@/lib/validation';
 
 const StartupForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pitch, setPitch] = useState("");
 
-    const handleFormSubmit = () => {};
+    const handleFormSubmit = async(prevState: any, formData: FormData) => {
+      try{
+        const formValues = {
+          title: formData.get("title") as string,
+          description: formData.get("description") as string,
+          category: formData.get("category") as string,
+          link: formData.get("link") as string,
+          pitch,
+        };
 
-  const [state, formAction, isPending] = useActionState(handleFormSubmit, {error: "", status: "INITIAL"});
+        await formSchema.parseAsync(formValues);
 
+        console.log(formValues);
+        
+        // const result = await createIdea(prevState, formData, pitch);
 
-
-  const isPending = false;
+        // console.log(result);
+      }catch(error){}
+    };
+  
+  // useActionState is a hook that allows us to submit forms without refreshing the page.
+  const [state, formAction, isPending] = useActionState(handleFormSubmit, {error: "", status: "INITIAL"}); 
 
   return (
     <form action={() => {}} className="startup-form">
@@ -73,7 +89,7 @@ const StartupForm = () => {
         {errors.link && <p className="startup-form-error">{errors.link}</p>}
       </div>
 
-      <Button type="submit" className="startup-form-btn" disabled={isPending}>
+      <Button type="submit" className="cursor-pointer startup-form-btn" disabled={isPending}>
         {isPending ? "Submitting..." : "Submit Your Pitch"}
         <Send className="ml-2 size-6" />
       </Button>
