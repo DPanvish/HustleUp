@@ -38,3 +38,4 @@ This will help us ensure that a specific module can be used in the server compon
 15) install "npm install markdown-it" and "npm i --save-dev @types/markdown-it"
 16) install additional css components "npx shadcn@latest add input textarea toast"
 17) For Pitch input field install react markdown editor "npm i @uiw/react-md-editor"
+18) Create a validation.ts which uses zod (It is a TypeScript-first schema validation with static type inference)
