@@ -11,10 +11,16 @@ import MDEditor from '@uiw/react-md-editor';
 import { Button } from './ui/button';
 import { Send } from 'lucide-react';
 import { formSchema } from '@/lib/validation';
+import { z } from 'zod';
+import { useToast } from '@/hooks/use-toast';
+import { useRouter } from 'next/router';
+
 
 const StartupForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pitch, setPitch] = useState("");
+  const {toast} = useToast();
+  const router = useRouter();
 
     const handleFormSubmit = async(prevState: any, formData: FormData) => {
       try{
@@ -33,14 +39,49 @@ const StartupForm = () => {
         // const result = await createIdea(prevState, formData, pitch);
 
         // console.log(result);
-      }catch(error){}
+
+        // if(result.status === "SUCCESS"){
+        //   toast({
+        //     title: "Success",
+        //     description: "Your startup pitch has been created successfully",
+        //     variant: "destructive",
+        //   });
+          
+        //   router.push(`/startup/${result.id}`);
+        // }
+
+        // return result;
+        
+      }catch(error){
+        if(error instanceof z.ZodError){
+          const fieldErrors = error.flatten().fieldErrors;
+
+          setErrors(fieldErrors as unknown as Record<string, string>);
+
+          toast({
+            title: "Error",
+            description: "Please check your inputs and try again",
+            variant: "destructive",
+          });
+
+          return { ...prevState, error: "Validation failed", status: "ERROR"};
+        }
+
+        toast({
+          title: "Error",
+          description: "Something went wrong",
+          variant: "destructive",
+        });
+
+        return { ...prevState, error: "Something went wrong", status: "ERROR"};
+      }
     };
   
   // useActionState is a hook that allows us to submit forms without refreshing the page.
   const [state, formAction, isPending] = useActionState(handleFormSubmit, {error: "", status: "INITIAL"}); 
 
   return (
-    <form action={() => {}} className="startup-form">
+    <form action={formAction} className="startup-form">
       <div>
         <label htmlFor="title" className="startup-form-label">Title</label>
         <Input id="title" name="title" className="startup-form-input" required placeholder="Startup Title" />
