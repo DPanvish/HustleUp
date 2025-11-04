@@ -13,7 +13,8 @@ import { Send } from 'lucide-react';
 import { formSchema } from '@/lib/validation';
 import { z } from 'zod';
 import { useToast } from '@/hooks/use-toast';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
+import { createPitch } from '@/lib/actions';
 
 
 const StartupForm = () => {
@@ -36,21 +37,21 @@ const StartupForm = () => {
 
         console.log(formValues);
         
-        // const result = await createIdea(prevState, formData, pitch);
+        const result = await createPitch(prevState, formData, pitch);
 
-        // console.log(result);
+        console.log(result);
 
-        // if(result.status === "SUCCESS"){
-        //   toast({
-        //     title: "Success",
-        //     description: "Your startup pitch has been created successfully",
-        //     variant: "destructive",
-        //   });
+        if(result.status === "SUCCESS"){
+          toast({
+            title: "Success",
+            description: "Your startup pitch has been created successfully",
+            variant: "destructive",
+          });
           
-        //   router.push(`/startup/${result.id}`);
-        // }
+          router.push(`/startup/${result._id}`);
+        }
 
-        // return result;
+        return result;
         
       }catch(error){
         if(error instanceof z.ZodError){
@@ -111,7 +112,7 @@ const StartupForm = () => {
       </div>
 
       <div data-color-mode="light">
-        <label htmlFor="pitch" className="startup-form-label">Image URL</label>
+        <label htmlFor="pitch" className="startup-form-label">Pitch</label>
         <MDEditor
           value={pitch}
           onChange={(value) => setPitch(value as string)}
