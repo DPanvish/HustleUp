@@ -40,3 +40,10 @@ This will help us ensure that a specific module can be used in the server compon
 17) For Pitch input field install react markdown editor "npm i @uiw/react-md-editor"
 18) Create a validation.ts which uses zod (It is a TypeScript-first schema validation with static type inference)
 19) Install slugify package "npm install slugify" which is used for geenerating unique id
+20) Override the next in the package.json before setting up sentry
+    "overrides": {
+        "react": "$react",
+        "react-dom": "$react-dom",
+        "next": "$next",
+    },
+20) Set up sentry follow the instructions on the site
