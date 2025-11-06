@@ -38,12 +38,12 @@ const page = async ({params}: {params: Promise<{id:string}>}) => {
           <div className="max-w-4xl mx-auto mt-10 space-y-5">
             <div className="gap-5 flex-between">
               <Link href={`/user/${post.author?._id}`} className="flex items-center gap-2 mb-3">
-                <Image src={post.author.image} alt="avatar" width={64} height={64} className="rounded-full drop-shadow-lg" />
+                <Image src={post.image} alt="avatar" width={64} height={64} className="rounded-full drop-shadow-lg" />
 
                 <div>
-                  <p className="text-20-medium">{post.author.name}</p>
+                  <p className="text-20-medium">{post.name}</p>
                   <p className="text-16-medium !text-black-300">
-                    @{post.author.username}
+                    @{post.username}
                   </p>
                 </div>
               </Link>
