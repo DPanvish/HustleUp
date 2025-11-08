@@ -48,3 +48,4 @@ This will help us ensure that a specific module can be used in the server compon
         "next": "$next",
     },
 20) Set up sentry follow the instructions on the site
+21) Add Skeleton component from shadcn "npx shadcn@latest add skeleton"
