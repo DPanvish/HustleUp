@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Navbar from "../../components/navbar";
 import SearchBar from "../../components/SearchBar";
 import { title } from "process";
 import StartupCard, { StartupCardType } from "@/components/StartupCard";
