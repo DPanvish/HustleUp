@@ -17,9 +17,15 @@ export const experimental_ppr = true;
 const page = async ({params}: {params: Promise<{id:string}>}) => {
   const id = (await params).id;
 
-  const post = await client.fetch(STARTUP_BY_ID_QUERY, {id});
-  
-  const {select: editorPosts} = await client.fetch(PLAYLIST_BY_SLUG_QUERY, {slug: "editor-picks-new"});
+  // Parallel Fetching (It takes less time, Fetch time is max of both fetches)
+  const [post, {select: editorPosts}] = await Promise.all([
+    client.fetch(STARTUP_BY_ID_QUERY, {id}),
+    client.fetch(PLAYLIST_BY_SLUG_QUERY, {slug: "editor-picks-new"})
+  ])
+
+  // Sequential Fetching (It takes more time, Fetch time is sum of both fetches)
+  // const post = await client.fetch(STARTUP_BY_ID_QUERY, {id});
+  // const {select: editorPosts} = await client.fetch(PLAYLIST_BY_SLUG_QUERY, {slug: "editor-picks-new"});
 
   if(!post){
       return notFound();
